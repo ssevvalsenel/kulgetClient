@@ -1,24 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+//Tema kullanımı için
+import { ColorModeContext, useMode } from "./theme";
+import { CssBaseline, ThemeProvider } from "@mui/material";
+
+//Router yapısı için
+import { RouterProvider } from "react-router-dom";
+import { router } from "./router/router";
+
+// import { ParallaxProvider } from "react-scroll-parallax";
 
 function App() {
+  const [theme, colorMode] = useMode();
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ColorModeContext.Provider value={colorMode}>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        {/* <ParallaxProvider> */}
+          <RouterProvider router={router} />
+        {/* </ParallaxProvider> */}
+      </ThemeProvider>
+    </ColorModeContext.Provider>
   );
 }
 
